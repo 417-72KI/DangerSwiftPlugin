@@ -1,8 +1,6 @@
 import Danger
 import Foundation
 
-var danger = Danger()
-
 public var git: Git {
     return danger.git
 }
@@ -25,4 +23,9 @@ public var bitbucketServer: BitBucketServer! {
 
 public var utils: DangerUtils {
     return danger.utils
+}
+
+// MARK: - private
+private var danger: DangerDSL {
+    return plugin.danger
 }
