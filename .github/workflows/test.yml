@@ -22,4 +22,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: test
-        run: set -o pipefail && swift test
+        run: swift test
