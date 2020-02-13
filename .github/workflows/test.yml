@@ -1,6 +1,7 @@
 name: Test
 on: 
   pull_request:
+    types: [opened, synchronize, edited]
     paths:
       - '**.swift'
       - '.github/workflows/*.yml'
@@ -10,6 +11,14 @@ jobs:
     runs-on: macOS-latest
     env:
       DEVELOPER_DIR: /Applications/Xcode_11.3.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v1
+      - name: test
+        run: set -o pipefail && swift test
+  linux:
+    name: Linux
+    runs-on: ubuntu-latest
+    container: swift:5.1
     steps:
       - uses: actions/checkout@v1
       - name: test
