@@ -21,12 +21,18 @@ Makes easier to call child DSLs (e.g. `git`, `github`)
     ],
     dependencies: [
         ...
-        .package(url: "https://github.com/danger/swift.git", from: "2.0.0"),
-        .package(url: "https://github.com/417-72KI/DangerSwiftPlugin.git", from: "0.2.0")
+        .package(url: "https://github.com/danger/swift.git", from: "3.14.0"),
+        .package(url: "https://github.com/417-72KI/DangerSwiftPlugin.git", from: "0.3.0")
         ...
     ],
     targets: [
-        .target(name: "DangerDependencies", dependencies: ["Danger", "DangerSwiftPlugin"]),
+        .target(
+          name: "DangerDependencies",
+          dependencies: [    
+            .product(name: "Danger", package: "danger-swift"),
+            "DangerSwiftPlugin"
+          ]
+        ),
         ...
     ]
   ```
