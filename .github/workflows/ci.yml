@@ -1,25 +1,28 @@
-name: Test
+name: CI
 on: 
   pull_request:
     types: [opened, synchronize, edited]
     paths:
       - '**.swift'
       - '.github/workflows/*.yml'
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
 jobs:
   macOS:
     name: macOS
     runs-on: macOS-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_11.3.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_12.5.app/Contents/Developer
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: test
         run: set -o pipefail && swift test
   linux:
     name: Linux
     runs-on: ubuntu-latest
-    container: swift:5.1
+    container: swift:5.4
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: test
         run: swift test
